@@ -1,16 +1,5 @@
 var db = new PouchDB('notes');
 
-// db.info().then(function (info) {
-//   document.getElementById('display').innerHTML = 'We have a database: ' + JSON.stringify(info);
-// });
-// db.info().then(function (info) {
-//   console.log(info);
-// });
-
-// db.get('2012-04-23T18:25:43.511Z').then(function (myNote) {
-//   console.log(myNote);
-// });
-
 function parseTags(text) {
   return text.match(/#\S+/g);
 }
@@ -31,7 +20,6 @@ function saveNote() {
 }
 
 function searchKeyword(keyword) {
-  db.plugin(require('pouchdb-quick-search'));
   return db.search({
     query: keyword,
     fields: ['_id', 'text'],
@@ -40,8 +28,4 @@ function searchKeyword(keyword) {
   });
 }
 
-console.log(searchKeyword("neymar"));
-// }).then(function (res) {
-//   console.log(res.rows[0].doc.text); // "It's-a me, Mario!"
-//   console.log(res.rows[0].highlighting); // {"text": "It's-a me, <strong>Mario</strong>!"}
-// });
+//console.log(searchKeyword("neymar"));
