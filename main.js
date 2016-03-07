@@ -1,6 +1,9 @@
 'use strict';
 
 const electron = require('electron');
+
+const globalShortcut = require('global-shortcut');
+
 // Module to control application life.
 const app = electron.app;
 // Module to create native browser window.
@@ -10,12 +13,13 @@ const BrowserWindow = electron.BrowserWindow;
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-function createWindow () {
+function createMainWindow(name) {
+
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600});
+  mainWindow = new BrowserWindow({ width: 800, height: 600 });
 
   // and load the index.html of the app.
-  mainWindow.loadURL('file://' + __dirname + '/app/html/index.html');
+  mainWindow.loadURL('file://' + __dirname + '/app/html/' + name + '.html');
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
@@ -29,9 +33,39 @@ function createWindow () {
   });
 }
 
+function CreateMainWindowSafe(name) {
+  if(!mainWindow){ createMainWindow(name); }
+  else {
+    closeMainWindow(function () {
+      createMainWindow(name);
+    });
+  }
+}
+
+function closeMainWindow(afterClosingCallback) {
+  mainWindow.on('closed', function () {
+    mainWindow = null;
+    afterClosingCallback();
+  });
+  mainWindow.close();
+}
+
+function registerShortcuts() {
+  globalShortcut.register('ctrl+s', function () {
+    CreateMainWindowSafe('search');
+  });
+  globalShortcut.register('ctrl+n', function () {
+    CreateMainWindowSafe('new-note');
+  });
+}
+
+function appReady () {
+  registerShortcuts();
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
-app.on('ready', createWindow);
+app.on('ready', appReady);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
