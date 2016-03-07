@@ -1,14 +1,17 @@
 <!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="../styles/styles.css">
+<script src="../../node_modules/pouchdb/dist/pouchdb.min.js"></script>
+<script src="../../node_modules/pouchdb-quick-search/dist/pouchdb.quick-search.js"></script>
+<script src="../js/db.js"></script>
 <html>
   <head>
     <meta charset="UTF-8">
     <title>Two Notes!</title>
   </head>
   <body>
-    We are using node <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
     <h1>Two Notes!</h1>
-    <input type="text" placeholder="write notes here">
+    <input id="note" type="text" placeholder="search or write notes here"
+      onkeydown = "if (event.keyCode == 13) document.getElementById('btnAdd').click()"/>
+    <input type = "button" id = "btnAdd" value = "Add" onclick = "saveNote();"/>
   </body>
 </html>

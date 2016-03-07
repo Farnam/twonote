@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Shortcuts
 Interface
 
@@ -13,3 +14,33 @@ Datetime
 Hashtag
 Mentions
 Text
+=======
+DB/Queries:
+-write search functions based on:
+  --hashtags
+  --mentions
+  --texts
+  --Dates note added? (specifying by 'on/in:'' something like google search)
+-write delete note function
+
+-Design:
+  --Alignment/position/styles of the input text
+  --Showing the results window, highlight the keywords
+  --Adding X for deleting
+  --etc.
+
+*********************************************************
+*********************** NEXT ****************************
+*********************************************************
+-Call OneNote public API to store notes
+  --look into MS OAuth for OneNote
+  --look into how to save new notes
+  --What's the format?
+    ---save each note as a page? and the date will be the title?
+    ---save notes of each month as a section?
+    ---save sections of each year as a section group?
+-See if Google Keep provides public APIs
+-Look into saving the IndexedDB in cloud, must be easy with CouchDB
+-Adding voice commands integration, with Cortana/Google/Siri to take fast notes
+-Adding edit capability for notes
+>>>>>>> bd8190232df3dcbc57536e03c0fae71c85ee801e
